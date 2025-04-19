@@ -29,8 +29,8 @@ namespace MatchingGame
         //has two appearances, so they can be matched.
         List<string> icons = new List<string>()
         {
-            "!", "!", "N", "N", ",", ",", "k", "k",
-            "b", "b", "v", "v", "w", "w", "z", "z"
+            "Y", "Y", "b", "b", "h", "h", "v", "v",
+            "L", "L", "O", "O", "!", "!", "$", "$"
         };
 
         //Goes through each square (control) and assigning it
@@ -64,30 +64,30 @@ namespace MatchingGame
 
             if (clickedLabel != null)
             {
-                //If the label is black, the label
+                //If the label is red, the label
                 //has already been clicked and
                 //method ends.
-                if (clickedLabel.ForeColor == Color.Black)
+                if (clickedLabel.ForeColor == Color.Crimson)
                     return;
 
                 //If firstClicked is null, this is the first
                 //label (square) to be pressed. Assign it to
-                //firstClicked and change the label to black.
+                //firstClicked and change the label to red.
                 if (firstClicked == null)
                 {
                     firstClicked = clickedLabel;
-                    firstClicked.ForeColor = Color.Black;
+                    firstClicked.ForeColor = Color.Crimson;
 
                     return;
                 }
 
                 //If the method reaches this, a firstClick has
                 //already been made, and this label is assigned
-                //to secondClicked and set to black.
+                //to secondClicked and set to red.
                 if (secondClicked == null)
                 {
                     secondClicked = clickedLabel;
-                    secondClicked.ForeColor = Color.Black;
+                    secondClicked.ForeColor = Color.Crimson;
                 }
 
                 //Check to see if the player won.
