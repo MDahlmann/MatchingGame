@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,11 +15,18 @@ namespace MatchingGame
         //Same as above, but with second label clicked in a set.
         Label secondClicked = null;
 
+        //Initialize stopwatch used for displayed elapsed time.
+        Stopwatch timer = new Stopwatch();
+
         public Form1()
         {
             InitializeComponent();
 
             AssignIconsToSquares();
+
+            timeElapsed.Start();
+
+            timer.Start();
         }
 
         //'Random' object used for getting random icons for the squares
@@ -145,8 +153,28 @@ namespace MatchingGame
             //If the method/loop didn't return, all icons are
             //matched, and the player is shown a message and form
             //is closed.
+            timeElapsed.Stop();
+
+            timer.Stop();
+
             MessageBox.Show("You've matched all the icons", "Good job and congratulations");
+
             Close();
+        }
+
+        //Each tick (100 ms) the elapsed time from the stopwatch
+        //is printed to timeLabel.
+        private void timeElapsed_Tick(object sender, EventArgs e)
+        {
+            //Elapsed time from timer is converted to a TimeSpan,
+            //so it can be formatted as needed.
+            TimeSpan ts = timer.Elapsed;
+
+            string elapsedTime = String.Format("{0:00}:{1:00}.{2:00}",
+            ts.Minutes, ts.Seconds,
+            ts.Milliseconds / 10);
+
+            timeLabel.Text = $"Time: {elapsedTime}";
         }
     }
 }
